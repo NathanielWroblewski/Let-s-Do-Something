@@ -1,0 +1,13 @@
+<div id="cat-title">
+  <h1>some exploring</h1>
+</div>
+
+<%if @activities.length > 0%>
+  <%= render 'results_list', :activities => @activities, :page => @page, :pages => @pages, :all_conditions => @all_conditions, :arguments => @arguments %>
+
+<% else %>
+  <div class="errors">
+    <h3>Sorry, we couldn't find anything for you. Would you like to try a <%= link_to  "new search?", root_path %> </h3>
+  </div>
+<% end %>
+

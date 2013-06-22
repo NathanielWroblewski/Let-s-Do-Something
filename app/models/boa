@@ -1,0 +1,28 @@
+user
+  has_many :videos
+  has_many :strategies
+  has_many :strategiesvideos, :through :strategies
+
+strategy
+  belongs_to :user
+  has_many :strategiesvideos
+  has_many :videos, :through :strategiesvideos
+
+strategiesvideo
+  belongs_to :strategy
+  belongs_to :video
+
+video
+  belongs_to :user
+  has_many :categories, :through => :categoriesvideos
+
+category
+  has_many :videos, :through => :categoriesvideos
+
+categoriesvideo
+  belongs_to :video
+  belongs_to :category
+
+
+
+

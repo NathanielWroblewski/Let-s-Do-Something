@@ -1,0 +1,16 @@
+<div id="cat-title">
+  <h1><%= @category.name %></h1>
+</div>
+<div id="category-header">
+  <% if @category.image_url %>
+    <div id="category-img" style="background: url(<%= @category.image_url %>) center center no-repeat">
+  </div>
+  <% end %>
+  <div id="cate-desc">
+    <p><%= link_to ("What is " + @category.name + "?"), about_category_path %>
+  </div>
+</div>
+
+<div id="list">
+<%= render 'activities/activities_sorted_list', :activities => @activities %>
+</div>

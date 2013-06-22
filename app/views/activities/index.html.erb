@@ -1,0 +1,56 @@
+<div id="cat-title">
+  <h1>Something</h1>
+</div>
+<div id="search-form">
+  <div id="search-img">
+  <div id="search-boxes">
+    <%= form_tag(activities_search_path) do %>
+    <%= render 'sentence_search' %>      
+    <div id="search-fields">
+      <div id="when-search">
+        <p>When?</p>
+        <div class="form-hidden">
+          <%= text_field_tag :starts_at, nil, :placeholder => "Start Date" %>
+          <%= text_field_tag :ends_at, nil, :placeholder => "End Date"  %>
+        </div>
+      </div>
+      <div class="and-or"><span>And</span><span>/</span><span>Or</span></div>
+      <div id="where-search">
+        <p>Where?</p>
+        <div class="form-hidden">
+          <%= text_field_tag :streets, nil, :placeholder => "Street", :class => 'form-extra' %>
+          <%= text_field_tag :cities, nil, :placeholder => "City" %>
+          <%= text_field_tag :regions, nil, :placeholder => "State" %>
+          <%= number_field_tag :zips, nil, :placeholder => "Zip code", :class => 'form-extra'%>
+        </div>
+      </div>
+
+      <div class="and-or"><span>And</span><span>/</span><span>Or</span></div>
+      <div id="what-search">
+        <p>What?</p>
+        <div class="form-hidden">
+          <%= select_tag :category, options_from_collection_for_select(Category.all_sorted, "id", "name"), :multiple => true, :size => 7 %>
+          <div class="selected-categories"></div>
+        </div>
+      </div>
+      <div class="and-or"><span>And</span><span>/</span><span>Or</span></div>
+      <div id="how-much-search">
+        <p>How much?</p>
+        <div class="form-hidden">
+          <%= number_field_tag :min_price, nil, :placeholder => "Min Price" %>
+          <%= number_field_tag :max_price, nil, :placeholder => "Max Price" %>
+        </div>
+      </div>
+    </div>
+    <div id="buttons-submit">
+      <%= submit_tag "Find Events" %>
+      <%= link_to 'Surprise Me!','surprise' %>
+    </div>
+    <% end %>  
+  </div>
+</div>
+</div>
+<div id="list">
+  <%= render 'activities/activities_sorted_list', :activities => @activities %>
+</div>
+

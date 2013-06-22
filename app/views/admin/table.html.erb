@@ -1,0 +1,29 @@
+<div>
+  <table>
+    <tr>
+      <th> To Edit </th>
+      <th> Word </th>
+      <th> Counter </th>
+      <th> Type </th>
+      <th> ID </th>
+      <th> Interpretation </th>
+    </tr>
+    <tbody>
+      <%= form_tag edit_multiple_admin_index_path do %>
+        <% @words.each do |word| %>
+        <tr>
+          <td> <%= check_box_tag "word_ids[]", word.id%> </td>
+          <td> <%= word.word %></td>
+          <td> <%= word.counter%></td>
+          <td> <%= word.wordable_type %></td>
+          <td> <%= "nil id" if word.wordable_id.nil? %></td>
+          <td> <%= "nil interp" if word.interpretation.nil? %></td>
+          <td> <%= link_to "Edit", edit_admin_path(word.id) %> </td>
+          <td> <%= link_to "Delete", admin_path(word.id), :method => :delete %> </td>
+        </tr>
+        <% end %>
+      <%= submit_tag "Edit" %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

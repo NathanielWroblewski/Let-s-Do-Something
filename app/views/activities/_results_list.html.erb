@@ -1,0 +1,40 @@
+<div id="list">
+  <div id="result">
+    <ul>
+    <% sort_desc(activities).each do |activity| %>
+      <li>
+      <%= link_to activity.title, activity_path(activity) %> 
+      <% if !activity.location_formated_short.blank? %> 
+        <span><%= activity.location_formated_short %>
+          <% if !activity.beginning_date_formated.blank? %>
+            , <%=activity.beginning_date_formated %></span>
+          <% else %>
+            </span>
+          <% end %>
+        <% else %>
+          <% if !activity.beginning_date_formated.blank? %>
+            <span><%=activity.beginning_date_formated %></span>
+          <% end %>
+      <% end %>
+    </li>
+    <% end %>
+    </ul>
+  </div>
+
+<% if page %>
+  <div id="pagination">
+    <% if page != 1 %>
+      <% if page != 2 %>
+        <p><%= link_to "<< first ", activities_search_path(:page => 1, :arguments => arguments, :all_conditions => all_conditions) %></p>
+      <% end %>
+    <p><%= link_to "< previous ", activities_search_path(:page => page - 1, :arguments => arguments, :all_conditions => all_conditions) %></p>
+    <% end %>
+    <span><%= page %> / <%= pages %></span>
+      <% if page != pages %>
+        <p><%= link_to " next > ", activities_search_path(:page => page + 1, :arguments => arguments, :all_conditions => all_conditions) %></p>
+      <% end %>
+    <% if page != pages - 1 && page != pages %>
+      <p><%= link_to " last >>", activities_search_path(:page => pages, :arguments => arguments, :all_conditions => all_conditions) %></p>
+    <% end %>
+  </div>
+<% end %>

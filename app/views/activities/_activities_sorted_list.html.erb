@@ -1,0 +1,39 @@
+  <% if sort_desc(today_list(activities), 5) != [] %>
+<div class="today">
+    <h1>Today</h1>
+    <ul>
+    <% sort_desc(today_list(activities), 5).each do |activity| %>
+      <li><%= link_to activity.title, activity_path(activity) %>
+      <span><%= activity.location_formated_short %>, <%= activity.beginning_time_formated %></span>
+      </li>
+    <% end %>
+    </ul>
+</div>
+  <% end %>
+
+  <% if sort_desc(weekend_list(activities), 5) != [] %>
+<div class="weekend">
+    <h1>This weekend</h1>
+    <ul>
+    <% sort_desc(weekend_list(activities), 5).each do |activity| %>
+      <li>
+        <%= link_to activity.title, activity_path(activity) %> 
+        <span><%= activity.location_formated_short %>, <%= activity.beginning_date_formated %></span>
+      </li>
+    <% end %>
+    </ul>
+</div>
+  <% end %>
+
+<div class="top">
+  <h1>Top</h1>
+  <ul>
+  <% sort_desc(activities, 5).each do |activity| %>
+    <li>
+      <%= link_to activity.title, activity_path(activity) %>
+      <span><%= activity.location_formated_short %>, <%= activity.beginning_date_formated %></span>
+    </li>
+  <% end %>
+  </ul>
+</div>
+

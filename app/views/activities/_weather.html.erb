@@ -1,0 +1,9 @@
+<% zipcode = '94105' if zipcode.nil? %>
+<% weather = api_call(zipcode.to_s) %>
+<p>Forecast Dates: <%= weather[0].join(' ') %></p>
+<p>Max Temperature: <%= weather[1].join %>F</p>
+<p>Min Temperature: <%= weather[2].join %>F</p>
+<p>Description: <%= weather[3].join %></p>
+<p><img src="<%= weather[4].join %>"></p>
+<p>Wind Direction: <%= weather[5].join %></p>
+<p>Wind Speed: <%= weather[6].join %>mph</p>

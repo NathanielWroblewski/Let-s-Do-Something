@@ -1,0 +1,24 @@
+<!-- # category, title, description, creator, lat, long, starts_at, ends_at, duration, venue_name,
+# street, city, region, zip, country, min_price, max_price -->
+<div id="search-form">
+  <div id="search-img">
+  </div>
+  <div id="search-boxes">
+    <%= form_tag(activities_search_path) do %>
+      <%= render 'sentence_search' %>      
+        <div id="search-fields">
+          <%= render 'when_search' %>
+          <div class="and-or"><span>And</span><span>/</span><span>Or</span></div>
+          <%= render 'where_search' %>
+          <div class="and-or"><span>And</span><span>/</span><span>Or</span></div>
+          <%= render 'what_search' %>
+          <div class="and-or"><span>And</span><span>/</span><span>Or</span></div>
+          <%= render 'how_much_search' %>
+      </div>
+      <div id="buttons-submit">
+        <%= submit_tag "Find Events" %>
+        <button>Surprise Me!</button>
+      </div>
+    <% end %>  
+  </div>
+</div>

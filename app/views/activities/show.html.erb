@@ -1,0 +1,145 @@
+<div id="show-act">
+
+  <div id="cat-title">
+    <h1><%= link_to @activity.cat, @activity.category %></h1>
+  </div>
+    
+  <div id ="act-title">
+    <h1><%= link_to @activity.title, @activity.url, :target => "_blank" %></h1>
+  </div>
+    <div id= "list-desc">
+      <span><%= link_to "Open activity website in a new tab", @activity.url, :target => "_blank" %></span>
+    <ul>
+      <% if @activity.description %>
+        <li>
+          <h6>Description:</h6>
+          <p><%= @activity.description %></p>
+        </li>
+      <% end %>
+      <% if @activity.beginning_time_formated %>
+        <li>
+          <h6>Starts:</h6>
+          <p><%= @activity.beginning_time_formated %></p>
+        </li>
+      <% else %>
+        <li>Check out the activity external link for dates and times</li>
+      <% end %>
+      <% if @activity.duration_formated %>
+        <li>
+          <h6>Duration:</h6>
+          <p><%= @activity.duration_formated %></p></li>
+      <% end %>
+      <% if @activity.display_price %>
+          <li>
+            <h6>Price:</h6>
+            <p><%= @activity.display_price %></p>
+          </li>
+      <% end %>
+      <li>
+        <h6>Address:</h6>
+        <p>
+          <%= @activity.street %>
+        </p>
+        <p>
+        <%= @activity.city %>
+          <% if @activity.region %>
+            <%= ", #{@activity.region.name}" %> 
+          <% end %>
+          <%= ", " if @activity.zip %>
+          <p class='activity-zip'>
+            <%= "#{@activity.zip}" if @activity.zip %></li>
+          </p>
+
+        </p>
+      </li>
+    </ul>
+    <%= (image_tag  @activity.image_url) if @activity.image_url %>
+  </div>
+
+  <div class="widgets">
+    <div class="weather-data"></div>
+    <div id="map-canvas" ></div>
+  </div>
+
+  <script>
+    // var directionsService;
+    var lat;
+    var lon;
+    // var directionsDisplay;
+    var map;
+    // var start;
+    // var end;
+    function loadScript() {
+      var script  = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "http://maps.googleapis.com/maps/api/js?key=AIzaSyAvISpslNjhCIoeZzvI8YIyJqWvElXLDy4&sensor=false&callback=initialize";
+      document.body.appendChild(script);
+      // directionsService = new google.maps.DirectionsService();
+    }
+
+    window.onload = loadScript;
+    var id = window.location.pathname.split('/')[2];
+    
+    $.ajax({
+      type: 'post',
+      url: 'coordinates',
+      dataType: 'json',
+      async: false,
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $  ('meta[name="csrf-token"]').attr('content'))},
+      data: {activity_id: id }
+    }).done(function(data){
+      lat = data.lat;
+      lon = data.lon;
+    });
+    
+    function initialize() {
+      directionsDisplay = new google.maps.DirectionsRenderer();
+      google.maps.visualRefresh = true;
+      var mapOptions = {
+        zoom: 12,
+        center: new google.maps.LatLng(lat, lon),
+        mapTypeControlOptions: {
+          mapTypeIds: google.maps.MapTypeId.ROADMAP
+        }
+      };
+      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      TestMarker();
+      // directionsDisplay.setMap(map);
+    }
+    
+    function addMarker(location) {
+      marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+    }
+
+    // function calcRoute() {
+    //   // See link for help displaying directions: https://developers.google.com/maps/documentation/javascript/directions
+    //   debugger
+    //   start = new google.maps.LatLng(37.792210 , -122.406141);
+    //   end = new google.maps.LatLng(lat, lon);
+    //   request = {
+    //     origin: start,
+    //     destination: end,
+    //     travelMode: google.maps.TravelMode.DRIVING
+    //   };
+    //   directionsService.route(request, function(result, status){
+    //     if (status == google.maps.DirectionsStatus.OK) {
+    //       directionsDisplay.setDirections(result);
+    //     }
+    //   });
+    // }
+    
+    function TestMarker() {
+      CentralPark = new google.maps.LatLng(lat, lon);
+      addMarker(CentralPark);
+    }
+
+    $.ajax({
+      type: 'post',
+      url: 'increment',
+      dataType: 'json',
+    });
+  </script>
+</div>

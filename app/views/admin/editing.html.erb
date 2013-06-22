@@ -1,0 +1,59 @@
+<% if @words %>
+  <%= form_for :word, :url => update_multiple_admin_index_path, :html => { :method => :put } do |f| %>
+  <h2> Input to change:</h2>
+    <ul>
+      <% @words.each do |word| %>
+        <li>
+          <%= hidden_field_tag "word_ids[]", word.id %>
+          <%= word.word %>
+        </li>
+      <% end %>
+    </ul>
+    <br>
+    <br>
+    <p>
+      <%= f.label :wordable_type %><br />
+      <%= f.select :wordable_type, Word.pluck(:wordable_type).uniq, {:include_blank => true } %>
+    </p>
+    <br>
+    <br>
+      <%= f.label :interpretation %><br />
+      <%= f.text_field :interpretation %>
+    </p>
+    <br>
+    <br>
+    <p>
+      <%= f.label "Wordable ID" %><br />
+      <%= f.text_field :wordable_id %>
+    </p>
+    <p><%= f.submit "Submit" %></p>
+  <% end %>
+<% else %>
+  <%= form_for :word, :url => admin_path, :html => { :method => :put } do |f| %>
+  <h2> Input to change:</h2>
+    <ul>
+        <li>
+          <%= hidden_field_tag "word_id", @word.id %>
+          <%= @word.word %>
+        </li>
+    </ul>
+    <br>
+    <br>
+    <p>
+      <%= f.label :wordable_type %><br />
+      <%= f.select :wordable_type, Word.pluck(:wordable_type).uniq, {:include_blank => true } %>
+    </p>
+    <br>
+    <br>
+      <%= f.label :interpretation %><br />
+      <%= f.text_field :interpretation %>
+    </p>
+    <br>
+    <br>
+    <p>
+      <%= f.label "Wordable ID" %><br />
+      <%= f.text_field :wordable_id %>
+    </p>
+    <p><%= f.submit "Submit" %></p>
+  <% end %>
+<% end %>

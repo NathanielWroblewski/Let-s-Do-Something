@@ -1,0 +1,46 @@
+$orange: #ff3500;
+$orange-light: #ac3d2f;
+$orange-dark: #A30000;
+$orange-very-dark: #6f0000;
+$orange-almost-black: #3f0000;
+$grey: #ececec;
+$grey-dark: #b9b9b9;
+$background: #fff;
+$arrow: url(asset_path('arrow.png', image));
+$search-back: url(asset_path('Mountain_Biking-6.jpg', image));
+$nav-font: url(asset_path('nav.jpg', image));
+$orange-back: url(asset_path('orange-back.jpg', image));
+$orange-back-fade: url(asset_path('orange-back-fade.png', image));
+$list-style: url(asset_path('square.jpg', image));
+
+@mixin trans_all_ease_in($time) {
+  -webkit-transition: all $time ease-in;
+  -moz-transition: all $time ease-in;
+  -o-transition: all $time ease-in;
+  -ms-transition: all $time ease-in;
+  transition: all $time ease-in;
+}
+
+@mixin trans_all_ease($time) {
+  -webkit-transition: all $time ease;
+  -moz-transition: all $time ease;
+  -o-transition: all $time ease;
+  -ms-transition: all $time ease;
+  transition: all $time ease;
+}
+
+@mixin trans_all_ease_out($time) {
+  -webkit-transition: all $time ease-out;
+  -moz-transition: all $time ease-out;
+  -o-transition: all $time ease-out;
+  -ms-transition: all $time ease-out;
+  transition: all $time ease-out;
+}
+
+@mixin border_rad_all($rad) {
+  -webkit-border-radius: $rad;
+  -moz-border-radius: $rad;
+  -o-border-radius: $rad;
+  -ms-border-radius: $rad;
+  border-radius: $rad;
+}

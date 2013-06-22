@@ -1,0 +1,23 @@
+===SYNthesis
+
+This is a web application to find outdoor activities and ticketable events
+
+To run:
+
+01. bundle
+02. rake db:create
+03. rake db:migrate
+04. rake db:seed
+05. export YELP_CONSUMER_KEY=pjPJg28OcOY7OPrshXB7PQ
+06. export YELP_CONSUMER_SECRET=PIVnAwLDi1v-kfyX13u56gflVFs
+07. export YELP_TOKEN=gmGaxBGgqJeQNOtTPBfvU-CpyNlmEGBx
+08. export YELP_TOKEN_SECRET=3HI5_ZIwOenGVyLmWlTSC1ycLo0
+09. rake import_yelp
+10. rake import_kumutu
+11. rake import sf_gate
+12. rake import_seatgeek
+13. rake save_alltrails_to_db
+14. rake save_everytrail_to_db
+15. rake save_transit_and_trails_trailhead_data_to_db
+16. rails s thin
+17. visit localhost:3000

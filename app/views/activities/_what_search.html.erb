@@ -1,0 +1,8 @@
+<div id="what-search">
+  <p>What?</p>
+  <div class="form-hidden">
+    <%= select_tag :category, options_from_collection_for_select(Category.all, "id", "name"), :multiple => true, :size => 7 %>
+  <div class="selected-categories"></div>
+  </div>
+</div>
+
